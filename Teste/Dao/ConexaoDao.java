@@ -3,7 +3,10 @@ package Teste.Dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConexaoDao {
 
@@ -45,7 +48,15 @@ public class ConexaoDao {
     public static void mostrarBancosExistentes(Connection conn) throws SQLException{
         String sql = "SHOW DATABASES";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.execute();
+        ResultSet valor = stmt.executeQuery();
+        List<String> bancos = new ArrayList<>();
+
+        while(valor.next()){
+           bancos.add(valor.getString("database"));
+        }
+        for (String banco: bancos){
+            System.out.println(banco);
+        }
         stmt.close();
     }
 
