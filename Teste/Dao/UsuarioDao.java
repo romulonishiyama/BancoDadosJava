@@ -6,10 +6,11 @@ import java.sql.SQLException;
 
 public class UsuarioDao {
 
+   
   
 
     public void inserirUsuario(Connection conn) throws SQLException{
-        String sql = "INSERT INTO TO TABLE (?) IF NOT EXISTS VALUES (?) ";
+        String sql = "INSERT INTO TO TABLE (?) IF NOT EXISTS VALUES ((?) varchar(30) not null) ";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(0, sql);
         stmt.execute();
