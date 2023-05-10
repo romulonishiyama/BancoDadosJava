@@ -64,8 +64,7 @@ public class ConexaoDao {
     public static void usarBanco(String nomeBanco, Connection conn) throws SQLException {
         String sql = "USE ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, nomeBanco);
-        stmt.execute();
+stmt.setString(1, sql);        stmt.execute();
         stmt.close();
         System.out.println("Usando banco " + nomeBanco);
 
