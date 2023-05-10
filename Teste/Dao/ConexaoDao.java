@@ -62,21 +62,37 @@ public class ConexaoDao {
     }
 
     public static void usarBanco(String nomeBanco, Connection conn) throws SQLException {
-        String sql = "USE ?";
+        String sql = "USE " + nomeBanco;
         PreparedStatement stmt = conn.prepareStatement(sql);
-stmt.setString(1, sql);        stmt.execute();
+        stmt.execute();
         stmt.close();
         System.out.println("Usando banco " + nomeBanco);
 
     }
 
-    public static void criarTabela(String nomeTabela, Connection conn) throws SQLException{
-        String sql = "CREATE table if not exists alunos  ? ;";
+    public static void criarTabela(String nomeTabela, Connection conn) throws SQLException {
+        String sql = "CREATE TABLE if not exists " + nomeTabela
+                + " (id int(100) primary key auto_increment not null, nome varchar(255) not null, email varchar(255) not null);";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, nomeTabela);
-        stmt.execute();
 
-        
+        stmt.execute();
+        stmt.close();
+
+    }
+
+    public static void mostrarTabelas(Connection conn) throws SQLException {
+        String sql = "SHOW TABLES";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet consulta = stmt.executeQuery();
+        List<String> resultados = new ArrayList<>();
+
+        while (consulta.next()) {
+            resultados.add(consulta.getString(1));
+        }
+        System.out.println("Tabelas desse banco:");
+        for (String resultado : resultados) {
+            System.out.println(resultado);
+        }
 
     }
 
