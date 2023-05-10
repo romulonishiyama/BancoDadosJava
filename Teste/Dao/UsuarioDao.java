@@ -17,25 +17,32 @@ public class UsuarioDao {
         stmt.close();
     }
 
-    public void listar(Connection conn) throws Exception {
+    public void listarDadosDaTabela(Connection conn) throws Exception {
         String sql = "SELECT * FROM alunos";
         PreparedStatement pst = conn.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
-            System.out.println("ID: "+ rs.getString("id")+ ", Nome: "+ rs.getString("nome")+ ", Email: "+rs.getString("email"));
+            System.out.println("ID: " + rs.getString("id") + ", Nome: " + rs.getString("nome") + ", Email: "
+                    + rs.getString("email"));
         }
 
     }
 
-    public void deletar(int id, Connection conn) throws SQLException{
+    public void deletar(int id, Connection conn) throws SQLException {
         String sql = "DELETE FROM ALUNOS WHERE ID=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, id);
         stmt.execute();
 
-        
-        
     }
 
+    public void alterarDados(int id, Connection conn, String novoNome) throws SQLException {
+        String sql = "UPDATE ALUNOS SET nome = '" + novoNome + "' WHERE ID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+
+    }
 }

@@ -11,10 +11,11 @@ public static void main(String[] args) throws Exception {
 
     
     Connection conexao = ConexaoDao.conectarBD();
-    // ConexaoDao.criarBancoDeDados(conexao, "database_data3");
-    // ConexaoDao.mostrarBancosExistentes(conexao);
-    ConexaoDao.usarBanco("base", conexao);
-    // ConexaoDao.criarTabela("Alunos", conexao);
+    // ConexaoDao.criarBancoDeDados(conexao, "database_");
+    ConexaoDao.mostrarBancosExistentes(conexao);
+
+    ConexaoDao.usarBanco("database_", conexao);
+    ConexaoDao.criarTabela("Alunos", conexao);
     ConexaoDao.mostrarTabelas(conexao);
     
     
@@ -22,9 +23,12 @@ public static void main(String[] args) throws Exception {
     UsuarioDao usuario = new UsuarioDao();
     usuario.inserirUsuario(conexao);
     
-    usuario.listar(conexao);
+    usuario.listarDadosDaTabela(conexao);
+    usuario.alterarDados(12, conexao, "Novo Marinho");
+    usuario.listarDadosDaTabela(conexao);
 
-    usuario.deletar(5, conexao);
+
+    // usuario.deletar(5, conexao);
     
 
 
