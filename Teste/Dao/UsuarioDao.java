@@ -17,8 +17,8 @@ public class UsuarioDao {
         stmt.close();
     }
 
-    public void listarDadosDaTabela(Connection conn) throws Exception {
-        String sql = "SELECT * FROM alunos";
+    public void listarDadosDaTabela(Connection conn, String nomeTabela) throws Exception {
+        String sql = "SELECT * FROM " + nomeTabela;
         PreparedStatement pst = conn.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
 
